@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <img src="./assets/contract.jpg">
+  <div id="app" class ="bg">
+    <img src="./assets/handshake.png">
     <router-view/>
   </div>
 </template>
@@ -16,9 +16,28 @@ export default {
 
 #app {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 0px;
 }
 img{
-  height: 120px;
+  height: 100px;
+  opacity: 0.5;
+  border-radius: 50%;
+
 }
+
+  body, html {
+    height: 100%;
+  }
+  .bg {
+    /* The image used */
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 </style>

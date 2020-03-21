@@ -1,13 +1,14 @@
 <template>
 
-  <div class="bg">
+  <div class="form" ref="content">
     
-    <h3>{{ msg }}</h3>
+    <h3>Wettvertrag</h3>
     <p class="mb-2">Hiermit wette ich  <input type="text" id="name1" class="form-control" placeholder="Dein Name"> mit  <input type="text" id="name2" class="form-control" placeholder ="Wettpartner"> Die Wette lautet wie folgend</p>
     <input type="text" id="text_groß" class="form-control">
     <p> Der Wetteinsatz ist der folgende: </p>
-    <input type="text" id="text_groß" class="form-control">
+     <mdb-input type="textarea" label="Outline textarea" outline :rows="3" />
     <mdb-btn outline="primary">Bestätigen</mdb-btn>
+    <button @click="download">Download PDF</button>
     
     </div>
     
@@ -15,28 +16,40 @@
   
 <script>
 import {mdbBtn} from 'mdbvue';
+import { mdbInput } from "mdbvue";
+
 export default {
   name: 'ButtonPage',
   components: {
     mdbBtn
+  },
+ 
+  name: "InputsPage",
+  components: {
+    mdbInput
   }
 
 }
 </script>
 
+  
+
+
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  body, html {
-    height: 100%;
-  }
-  .bg {
+ 
+  .form {
     /* The image used */
     background-color:ghostwhite;
 
     /* Full height */
-    height: 100%;
+    
     width:50%;
     margin:auto;
+    margin-top: 20px;
+    border: black;
+
   
     ;
 
@@ -72,6 +85,7 @@ p {
   width:600px;
   display: block;
   margin: 0 auto;
+  text-align: start;
   
 }
 </style>
