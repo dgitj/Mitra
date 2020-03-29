@@ -12,7 +12,8 @@
     "core-js": "^3.6.4",
     "jspdf": "^1.5.3",
     "mdbvue": "6.5.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-signature-pad": "^2.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",

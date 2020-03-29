@@ -6,7 +6,12 @@
     <p class="mb-2">Hiermit wette ich  <input type="text" id="name1" class="form-control" placeholder="Dein Name"> mit  <input type="text" id="name2" class="form-control" placeholder ="Wettpartner"> Die Wette lautet wie folgend</p>
     <input type="text" id="text_groß" class="form-control">
     <p> Der Wetteinsatz ist der folgende: </p>
-     <mdb-input type="textarea" label="Outline textarea" outline :rows="3" />
+    <mdb-input type="textarea" label="Outline textarea" outline :rows="3" />
+    <VueSignaturePad width="500px" height="250px" ref="signaturePad" />
+    <div>
+      <button @click="save">Save</button>
+      <button @click="undo">Undo</button>
+    </div>
     <mdb-btn outline="primary">Bestätigen</mdb-btn>
     <button @click="download">Download PDF</button>
     
@@ -19,14 +24,20 @@ import {mdbBtn} from 'mdbvue';
 import { mdbInput } from "mdbvue";
 
 export default {
-  name: 'ButtonPage',
+  name: 'InputsPage',
   components: {
-    mdbBtn
-  },
- 
-  name: "InputsPage",
-  components: {
+    mdbBtn,
     mdbInput
+  },
+  methods: {
+    undo() {
+      this.$refs.signaturePad.undoSignature();
+    },
+    save() {
+      const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
+      console.log(isEmpty);
+      console.log(data);
+    }
   }
 
 }
