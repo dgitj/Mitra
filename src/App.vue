@@ -26,14 +26,14 @@ img{
 }
 
   body, html {
-    height: 100%;
+    height: 105%;
   }
   .bg {
     /* The image used */
-    background-image: url("./assets/hammer.jpg");
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
 
     /* Full height */
-    height: 100%;
+    height: 120%;
 
     /* Center and scale the image nicely */
     background-position: center;

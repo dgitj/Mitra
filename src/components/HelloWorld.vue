@@ -4,13 +4,15 @@
       <p class="mb-2">Hiermit wette ich  <input type="text" id="name1" class="form-control" placeholder="Dein Name"> mit  <input type="text" id="name2" class="form-control" placeholder ="Wettpartner"> Die Wette lautet wie folgend</p>
       <mdb-input type="textarea" label="Wir wetten, dass..." outline :rows="3" id="Einsatz" />
       <mdb-input  type="textarea" label="Der Verlierer der Wette muss.." outline :rows="3" id="Einsatz"  />
-      <p class= "mb-2" > <mdb-input class="w-25 p-3" type="email" placeholder="e-mail Wettpartner 1" size="sm" outline/> <mdb-input class="w-25 p-3" type="email" placeholder="e-mail Wettpartner 2" size="sm" outline/></p>
-  <VueSignaturePad width="500px" height="250px" ref="signaturePad" />
+  <p>Bitte unterschreibt hier: </p>
+  <VueSignaturePad  height="100px" ref="signaturePad" id ="signature"/>
     <div>
       <button @click="save">Save</button>
       <button @click="undo">Undo</button>
-    </div>
-    <mdb-btn @click="download" outline="primary">Bestätigen</mdb-btn>
+    </div> 
+  <p> Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen versand. </p>
+  <p class= "mb-2" > <mdb-input type="email" placeholder="e-mail Wettpartner 1" size="sm" outline/> <mdb-input type="email" placeholder="e-mail Wettpartner 2" size="sm" outline/></p>
+  <mdb-btn @click="download" outline="primary">Bestätigen</mdb-btn>
     </div>    
 </template>
   
@@ -18,8 +20,6 @@
 import {mdbBtn} from 'mdbvue';
 import { mdbInput } from "mdbvue";
 import jsPDF from 'jspdf'; 
-
-
 
 export default {
   name: 'InputsPage',
@@ -67,6 +67,7 @@ export default {
     margin:auto;
     margin-top: 20px;
     border: black;
+    margin-bottom:100px;
 
   
     ;
@@ -77,6 +78,9 @@ export default {
     background-size: cover;
   }
 
+button{
+  align-content: left;
+}
 
 h3 {
   font-weight: normal;
@@ -89,6 +93,7 @@ p {
   font-size: 14px;
   text-align: left;
   margin-left: 10px;
+  
   
 
 }
@@ -112,6 +117,13 @@ p {
   align-self: center;
   margin: auto;
 }
+
+#signature{
+  border-radius: 5px;
+  border: double 2px;
+}
+
+
   
 
 </style>
