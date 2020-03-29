@@ -90,7 +90,7 @@ h3 {
 p {
   color: #969696;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 16px;
   text-align: left;
   margin-left: 10px;
   
