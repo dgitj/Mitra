@@ -5,11 +5,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-// import jsPDF from 'jspdf' 
-// import html2canvas from "html2canvas"
+
 import VueSignaturePad from 'vue-signature-pad';
  
 Vue.use(VueSignaturePad);
+
 Vue.config.productionTip = false
 
 new Vue({
