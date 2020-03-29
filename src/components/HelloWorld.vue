@@ -1,23 +1,22 @@
 <template>
+  <div ref= "content" class="form">
+      <h3>Wettvertrag</h3>
+      <p class="mb-2">Hiermit wette ich  <input type="text" id="name1" class="form-control" placeholder="Dein Name"> mit  <input type="text" id="name2" class="form-control" placeholder ="Wettpartner"> Die Wette lautet wie folgend</p>
+      <mdb-input type="textarea" label="Wir wetten, dass..." outline :rows="3" id="Einsatz" />
+      <mdb-input  type="textarea" label="Der Verlierer der Wette muss.." outline :rows="3" id="Einsatz"  />
+      <p class= "mb-2" > <mdb-input class="w-25 p-3" type="email" placeholder="e-mail Wettpartner 1" size="sm" outline/> <mdb-input class="w-25 p-3" type="email" placeholder="e-mail Wettpartner 2" size="sm" outline/></p>
+  <mdb-btn @click="download" outline="primary">Bestätigen</mdb-btn>
 
-  <div class="form" ref="content">
-    
-    <h3>Wettvertrag</h3>
-    <p class="mb-2">Hiermit wette ich  <input type="text" id="name1" class="form-control" placeholder="Dein Name"> mit  <input type="text" id="name2" class="form-control" placeholder ="Wettpartner"> Die Wette lautet wie folgend</p>
-    <mdb-input type="textarea" label="Wir wetten, dass..." outline :rows="3" id="Einsatz" />
-    <p> Der Wetteinsatz ist der folgende: </p>
-    <mdb-input class="w-75 p-3" type="textarea" label="Der Verlierer der Wette muss.." outline :rows="3" id="Einsatz"  />
-    <p class= "mb-2" > <mdb-input class="w-25 p-3" type="email" placeholder="name1 e-mail" size="sm" outline/> <mdb-input class="w-25 p-3" type="email" placeholder="name1 e-mail" size="sm" outline/></p>
-    <mdb-btn outline="primary">Bestätigen</mdb-btn>
-    <button @click="download">Download PDF</button>
-    
-    </div>
-    
+ </div>       
+ 
 </template>
   
 <script>
 import {mdbBtn} from 'mdbvue';
 import { mdbInput } from "mdbvue";
+import jsPDF from 'jspdf'; 
+
+
 
 export default {
   name: 'ButtonPage',
@@ -25,8 +24,19 @@ export default {
     mdbBtn,
     mdbInput
   }
-
+,
+  methods: {
+    download() {
+      const doc = new jsPDF();
+      const contentHtml = this.$refs.content.innerHTML;
+      doc.fromHTML(contentHtml, 15, 15, {
+        width: 170
+      });
+      doc.save("sample.pdf");
+    }
+  }
 }
+
 </script>
 
   
@@ -35,7 +45,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
- 
+
+
   .form {
     /* The image used */
     background-color:ghostwhite;
