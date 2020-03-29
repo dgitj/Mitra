@@ -5,10 +5,13 @@
       <mdb-input type="textarea" label="Wir wetten, dass..." outline :rows="3" id="Einsatz" />
       <mdb-input  type="textarea" label="Der Verlierer der Wette muss.." outline :rows="3" id="Einsatz"  />
       <p class= "mb-2" > <mdb-input class="w-25 p-3" type="email" placeholder="e-mail Wettpartner 1" size="sm" outline/> <mdb-input class="w-25 p-3" type="email" placeholder="e-mail Wettpartner 2" size="sm" outline/></p>
-  <mdb-btn @click="download" outline="primary">Bestätigen</mdb-btn>
-
- </div>       
- 
+  <VueSignaturePad width="500px" height="250px" ref="signaturePad" />
+    <div>
+      <button @click="save">Save</button>
+      <button @click="undo">Undo</button>
+    </div>
+    <mdb-btn @click="download" outline="primary">Bestätigen</mdb-btn>
+    </div>    
 </template>
   
 <script>
@@ -19,12 +22,11 @@ import jsPDF from 'jspdf';
 
 
 export default {
-  name: 'ButtonPage',
+  name: 'InputsPage',
   components: {
     mdbBtn,
     mdbInput
-  }
-,
+  },
   methods: {
     download() {
       const doc = new jsPDF();
@@ -33,6 +35,14 @@ export default {
         width: 170
       });
       doc.save("sample.pdf");
+    },
+      undo() {
+      this.$refs.signaturePad.undoSignature();
+    },
+    save() {
+      const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
+      console.log(isEmpty);
+      console.log(data);
     }
   }
 }
