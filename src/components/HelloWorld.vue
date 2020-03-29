@@ -4,9 +4,10 @@
     
     <h3>Wettvertrag</h3>
     <p class="mb-2">Hiermit wette ich  <input type="text" id="name1" class="form-control" placeholder="Dein Name"> mit  <input type="text" id="name2" class="form-control" placeholder ="Wettpartner"> Die Wette lautet wie folgend</p>
-    <input type="text" id="text_groß" class="form-control">
+    <mdb-input type="textarea" label="Wir wetten, dass..." outline :rows="3" id="Einsatz" />
     <p> Der Wetteinsatz ist der folgende: </p>
-     <mdb-input type="textarea" label="Outline textarea" outline :rows="3" />
+    <mdb-input class="w-75 p-3" type="textarea" label="Der Verlierer der Wette muss.." outline :rows="3" id="Einsatz"  />
+    <p class= "mb-2" > <mdb-input class="w-25 p-3" type="email" placeholder="name1 e-mail" size="sm" outline/> <mdb-input class="w-25 p-3" type="email" placeholder="name1 e-mail" size="sm" outline/></p>
     <mdb-btn outline="primary">Bestätigen</mdb-btn>
     <button @click="download">Download PDF</button>
     
@@ -21,11 +22,7 @@ import { mdbInput } from "mdbvue";
 export default {
   name: 'ButtonPage',
   components: {
-    mdbBtn
-  },
- 
-  name: "InputsPage",
-  components: {
+    mdbBtn,
     mdbInput
   }
 
@@ -69,7 +66,9 @@ p {
   color: #969696;
   margin-bottom: 0;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
+  margin-left: 10px;
+  
 
 }
 #name1{
@@ -86,6 +85,12 @@ p {
   display: block;
   margin: 0 auto;
   text-align: start;
-  
 }
+
+#Einsatz{
+  align-self: center;
+  margin: auto;
+}
+  
+
 </style>
