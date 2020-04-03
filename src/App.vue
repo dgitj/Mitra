@@ -1,6 +1,6 @@
 <template>
   <div id="app" class ="bg">
-    <img src="./assets/handshake.png">
+    <img src="./assets/handshake2.jpg" data-html2canvas-ignore>
     <router-view/>
   </div>
 </template>
@@ -18,16 +18,19 @@ export default {
 #app {
   text-align: center;
   margin-top: 0px;
+  
 }
 img{
-  height: 100px;
-  opacity: 0.5;
-  border-radius: 50%;
+  height: 50px;
+  opacity: 0.2;
+  border-radius:50%;
+  
+  
 
 }
 
   body, html {
-    height: 105%;
+    height: auto;
   }
   .bg {
     /* The image used */
