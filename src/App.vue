@@ -13,6 +13,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300");
 
 #app {
   text-align: center;
