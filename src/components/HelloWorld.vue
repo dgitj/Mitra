@@ -19,7 +19,7 @@
             </div> 
       </div>  
       <p data-html2canvas-ignore> Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen verschickt. </p>
-      <p  data-html2canvas-ignore class= "mb-2" > <mdb-input type="email" placeholder="e-mail Wettpartner 1" size="sm" outline/> <mdb-input type="email" placeholder="e-mail Wettpartner 2" size="sm" outline/></p>
+      <p  data-html2canvas-ignore class= "mb-2" > <mdb-input type="email" placeholder="E-mail Wettpartner 1" size="sm" outline/> <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" outline/></p>
       <mdb-btn @click="download" outline="primary " data-html2canvas-ignore>Bestätigen</mdb-btn>
   </div>    
 </template>
