@@ -1,5 +1,8 @@
 <template>
   <div>
+    <mdb-container>
+        <mdb-row>
+          <mdb-col>
     <div ref= "content" class="form" id="contract">
           <div   id="head">
             <h3>Wettvertrag</h3>
@@ -22,10 +25,15 @@
         <p  data-html2canvas-ignore class= "mb-2" > <mdb-input type="email" placeholder="E-mail Wettpartner 1" size="sm" outline /> <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" outline/></p>
         <mdb-btn @click="download" outline="primary " data-html2canvas-ignore>Bestätigen</mdb-btn>
     </div> 
+    </mdb-col>
+    <mdb-col>
     <div id="disclaimer">
         <h2>Disclaimer</h2>
-        <p>Wettschulden sind Ehrschulden, die rechtlich gesehen nicht zu erfüllen sind, gem. § 762 BGB. Das wiederum bedeutet, dass der Wetteinsatz auch gerichtlich nicht durchgesetzt werden kann.</p>
+        <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
     </div>
+    </mdb-col>
+    </mdb-row>
+    </mdb-container>
   </div>   
 </template>
   
@@ -48,6 +56,7 @@ export default {
       html2canvas(document.querySelector('#contract'),{
         width: 10000,
         height: 1000,
+
       } 
       ).then(canvas => {
       document.body.appendChild(canvas)
