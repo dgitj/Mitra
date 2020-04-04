@@ -1,50 +1,51 @@
 <template>
   <div>
-      <div id="disclaimer">
-        <h2>Disclaimer</h2>
-        <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
+    <div ref="content" class="form" id="contract">
+      <div id="head">
+        <h3>Wettvertrag</h3>
+        <p class="mb-2">
+          Hiermit wette ich
+          <input type="text" id="name" class="form-control" placeholder="Dein Name"/>
+          mit
+          <input type="text" id="name" class="form-control" placeholder ="Wettpartner">.
+        </p> 
       </div>
 
-      <div ref="content" class="form" id="contract">
-        <div id="head">
-          <h3>Wettvertrag</h3>
-          <p class="mb-2">
-            Hiermit wette ich
-            <input type="text" id="name1" class="form-control" placeholder="Dein Name"/>
-            mit
-            <input type="text" id="name2" class="form-control" placeholder ="Wettpartner">.
-          </p> 
-        </div>
-        <div  id="bet">
-          <mdb-input type="textarea" label="Wir wetten, dass..." outline :rows="3" />
-          <mdb-input  type="textarea" label="Der Verlierer der Wette muss.." outline :rows="3" id="stake"  />
-        </div>
-        <p id>Bitte unterschreibt hier: </p>
-        <div class="container" id="signature">
-          <div class="row">
-            <div class="col-6">
-              <VueSignaturePad  width ="300px" height="100px" ref="signaturePad1" class="pad"/>
-              <div id = "ignore" data-html2canvas-ignore>
-                <mdb-btn @click="undo1">Undo</mdb-btn>
-              </div> 
-            </div>
-            <div class="col-6">
-              <VueSignaturePad  width ="300px" height="100px" ref="signaturePad2" class="pad"/>
-              <div id = "ignore" data-html2canvas-ignore>
-                <mdb-btn @click="undo2">Undo</mdb-btn>
-              </div>
+      <div  id="bet">
+        <mdb-input type="textarea" label="Wir wetten, dass..." :rows="3" class="text-box" />
+        <mdb-input  type="textarea" label="Der Verlierer der Wette muss..." :rows="3" id="stake" class="text-box" />
+      </div>
+      <p id>Bitte unterschreibt hier: </p>
+      <div class="container" id="signature">
+        <div class="row">
+          <div class="col-6">
+            <VueSignaturePad  width ="300px" height="100px" ref="signaturePad1" id="signaturePad1" class="pad"/>
+            <div id ="ignore" data-html2canvas-ignore>
+              <mdb-btn class="btn btn-blue-grey" @click="undo1">Undo</mdb-btn>
+            </div> 
+          </div>
+          <div class="col-6">
+            <VueSignaturePad  width ="300px" height="100px" ref="signaturePad2" class="pad"/>
+            <div id ="ignore" data-html2canvas-ignore>
+              <mdb-btn class="btn btn-blue-grey" @click="undo2">Undo</mdb-btn>
             </div>
           </div>
-        </div> 
-        <p data-html2canvas-ignore> 
-          Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen verschickt.
-        </p>
-        <p  data-html2canvas-ignore class= "mb-2" >
-          <mdb-input type="email" placeholder="E-mail Wettpartner 1" size="sm" outline />
-          <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" outline/>
-        </p>
-        <mdb-btn id="submit-button" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
+        </div>
       </div> 
+      <p data-html2canvas-ignore> 
+        Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen verschickt.
+      </p>
+      <p class= "mb-2" data-html2canvas-ignore>
+        <mdb-input type="email" placeholder="E-mail Wettpartner 1" size="sm" id="mail1" outline />
+        <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" outline/>
+      </p>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
+    </div>
+
+    <div id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
+    </div>
 
   </div>   
 </template>
@@ -52,7 +53,7 @@
 <script>
   import { mdbBtn } from 'mdbvue';
   import { mdbInput } from "mdbvue";
-  import jsPDF from 'jspdf'; 
+  import jsPDF from 'jspdf';
   import html2canvas from'html2canvas';
 
   export default {
@@ -62,16 +63,22 @@
       mdbInput
     },
     methods: { 
-      download() {
-        var doc = new jsPDF
-        html2canvas(document.querySelector('#contract'),{
-
-        }
-        ).then(canvas => {
-          var imgData1 = canvas.toDataURL('img/png');
-          doc.addImage(imgData1, 'PNG', 0, 0);
+      async download() {
+        var doc = new jsPDF("landscape")
+        await html2canvas(document.querySelector(".form"), {
+          x: 0,
+          y: 0,
+          width: 1000,
+          height: 1000,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: 0,
+          windowHeight: 1000
+        }).then(canvas => {
+          var imgData1 = canvas.toDataURL("img/png");
+          doc.addImage(imgData1, 'PNG', 50, 10);
           doc.save('sample.pdf');
-        });   
+        });
       },
       undo1() {
         this.$refs.signaturePad1.undoSignature();
@@ -93,10 +100,23 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .pad {
+    border-bottom: 2px solid;
+    margin-bottom:5px;
+  }
+
+  .text-box {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #submit-button {
+    margin-bottom: 10px;
+  }
+
   #contract {
     background-color:#eadebd;
     margin: auto;
-    margin-top: 20px;
     border: black;
     border-radius: 10px;
     border: double 7px;
@@ -132,19 +152,13 @@
     border: double 1px;
   }
 
-  #name1 {
+  #name {
     width: 130px;
     display: inline-block;
     height: 25px;
     text-align:center;
   }
 
-  #name2 {
-    width: 130px;
-    display: inline-block;
-    height: 25px;
-    text-align:center;
-  }
   #text_groß {
     height: 100px;
     width:600px;
@@ -160,10 +174,6 @@
 
   #signature {
     width: 650px;
-  }
-  .pad {
-    border-bottom: 2px solid;
-    margin-bottom:5px;
   }
 
   #mail {

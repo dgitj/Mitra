@@ -22,7 +22,8 @@ export default {
   #app {
     text-align: center;
     margin-top: 0px;
-    height: 100%;   
+    height: 100%;
+    min-height: 900px;
     background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
     background-position: center;
     background-repeat: no-repeat;
