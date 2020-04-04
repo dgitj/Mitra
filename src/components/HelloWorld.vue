@@ -1,47 +1,59 @@
 <template>
   <div>
-    <mdb-container>
-        <mdb-row>
-          <mdb-col>
-    <div ref= "content" class="form" id="contract">
-          <div   id="head">
-            <h3>Wettvertrag</h3>
-            <p class="mb-2">Hiermit wette ich  <input type="text" id="name1" class="form-control" placeholder="Dein Name"> mit  <input type="text" id="name2" class="form-control" placeholder ="Wettpartner"> . </p> 
-            <!--p>Die Wette lautet wie folgend:</p-->
+    <div ref="content" class="form" id="contract">
+      <div id="head">
+        <h3>Wettvertrag</h3>
+        <p class="mb-2">
+          Hiermit wette ich
+          <input type="text" id="name" class="form-control" placeholder="Dein Name"/>
+          mit
+          <input type="text" id="name" class="form-control" placeholder ="Wettpartner">.
+        </p> 
+      </div>
+
+      <div  id="bet">
+        <mdb-input type="textarea" label="Wir wetten, dass..." :rows="3" class="text-box" />
+        <mdb-input  type="textarea" label="Der Verlierer der Wette muss..." :rows="3" id="stake" class="text-box" />
+      </div>
+      <p id>Bitte unterschreibt hier: </p>
+      <div class="container" id="signature">
+        <div class="row">
+          <div class="col-6">
+            <VueSignaturePad  width ="300px" height="100px" ref="signaturePad1" id="signaturePad1" class="pad"/>
+            <div id ="ignore" data-html2canvas-ignore>
+              <mdb-btn class="btn btn-blue-grey" @click="undo1">Undo</mdb-btn>
+            </div> 
           </div>
-          <div  id="bet">
-            <mdb-input type="textarea" label="Wir wetten, dass..." outline :rows="3" />
-            <mdb-input  type="textarea" label="Der Verlierer der Wette muss.." outline :rows="3" id="stake"  />
+          <div class="col-6">
+            <VueSignaturePad  width ="300px" height="100px" ref="signaturePad2" class="pad"/>
+            <div id ="ignore" data-html2canvas-ignore>
+              <mdb-btn class="btn btn-blue-grey" @click="undo2">Undo</mdb-btn>
+            </div>
           </div>
-          <p id>Bitte unterschreibt hier: </p>
-        <div id="signature">
-            <VueSignaturePad  width =" 600px" height="100px" ref="signaturePad" id ="pad"/>
-              <div id = "ignore" data-html2canvas-ignore>
-                <!--button @click="save">Save</button -->
-                <button @click="undo">Undo</button>
-              </div> 
-        </div>  
-        <p data-html2canvas-ignore> Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen verschickt. </p>
-        <p  data-html2canvas-ignore class= "mb-2" > <mdb-input type="email" placeholder="E-mail Wettpartner 1" size="sm" outline /> <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" outline/></p>
-        <mdb-btn @click="download" outline="primary " data-html2canvas-ignore>Bestätigen</mdb-btn>
-    </div> 
-    </mdb-col>
-    <mdb-col>
-    <div id="disclaimer">
-        <h2>Disclaimer</h2>
-        <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
+        </div>
+      </div> 
+      <p data-html2canvas-ignore> 
+        Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen verschickt.
+      </p>
+      <p class= "mb-2" data-html2canvas-ignore>
+        <mdb-input type="email" placeholder="E-mail Wettpartner 1" size="sm" id="mail1" outline />
+        <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" outline/>
+      </p>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
     </div>
-    </mdb-col>
-    </mdb-row>
-    </mdb-container>
+
+    <div id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
+    </div>
+
   </div>   
 </template>
-  
 
 <script>
   import { mdbBtn } from 'mdbvue';
   import { mdbInput } from "mdbvue";
-  import jsPDF from 'jspdf'; 
+  import jsPDF from 'jspdf';
   import html2canvas from'html2canvas';
 
   export default {
@@ -51,25 +63,36 @@
       mdbInput
     },
     methods: { 
-      download() {
-        var doc = new jsPDF
-        html2canvas(document.querySelector('#contract'),{
-          width: 10000,
-          height: 1000
-        }
-        ).then(canvas => {
-          var imgData1 = canvas.toDataURL('img/png');
-          doc.addImage(imgData1, 'PNG', 0, 0);
+      async download() {
+        var doc = new jsPDF("landscape")
+        await html2canvas(document.querySelector(".form"), {
+          x: 0,
+          y: 0,
+          width: 1000,
+          height: 1000,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: 0,
+          windowHeight: 1000
+        }).then(canvas => {
+          var imgData1 = canvas.toDataURL("img/png");
+          doc.addImage(imgData1, 'PNG', 50, 10);
           doc.save('sample.pdf');
-        });   
+        });
       },
-      undo() {
-        this.$refs.signaturePad.undoSignature();
+      undo1() {
+        this.$refs.signaturePad1.undoSignature();
+      },
+      undo2() {
+        this.$refs.signaturePad2.undoSignature();
       },
       save() {
-        const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
-        console.log(isEmpty);
-        console.log(data);
+        const { isEmpty1, data1 } = this.$refs.signaturePad1.saveSignature();
+        const { isEmpty2, data2 } = this.$refs.signaturePad2.saveSignature();
+        console.log(isEmpty1);
+        console.log(data1);
+        console.log(isEmpty2);
+        console.log(data2);
       }
     }
   }
@@ -77,25 +100,28 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .form {
-    /* The image used */
-    background-color:#eadebd;
-
-    /* Full height */
-    width:50%;
-    margin:auto;
-    margin-top: 20px;
-    border: black;
-    margin-bottom:100px;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  .pad {
+    border-bottom: 2px solid;
+    margin-bottom:5px;
   }
 
-  button {
-    align-content: left;
+  .text-box {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #submit-button {
+    margin-bottom: 10px;
+  }
+
+  #contract {
+    background-color:#eadebd;
+    margin: auto;
+    border: black;
+    border-radius: 10px;
+    border: double 7px;
+    align-content: center;
+    width: 750px;
   }
 
   h3 {
@@ -118,27 +144,21 @@
 
   #disclaimer {
     background-color:#eadebd;
-    margin-right:20px;
-    height:auto;
-    width:300px;
-    margin-left: 1250px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 300px;
     border-radius:5px;
     border: double 1px;
   }
 
-  #name1 {
+  #name {
     width: 130px;
     display: inline-block;
     height: 25px;
     text-align:center;
   }
 
-  #name2 {
-    width: 130px;
-    display: inline-block;
-    height: 25px;
-    text-align:center;
-  }
   #text_groß {
     height: 100px;
     width:600px;
@@ -153,23 +173,7 @@
   }
 
   #signature {
-    align-self: center;
-    margin-left: 20px;
-  }
-  #pad {
-    border-bottom: 2px solid;
-    width:90px;
-    margin-bottom:5px;
-    
-  }
-
-  #contract {
-    height:800px;
-    width:650px;
-    border-radius: 5px;
-    border: double 7px;
-    margin-top:5px;
-    margin-bottom:10px;
+    width: 650px;
   }
 
   #mail {
