@@ -39,68 +39,54 @@
   
 
 <script>
-import {mdbBtn} from 'mdbvue';
-import { mdbInput } from "mdbvue";
-import jsPDF from 'jspdf'; 
-import html2canvas from'html2canvas';
+  import { mdbBtn } from 'mdbvue';
+  import { mdbInput } from "mdbvue";
+  import jsPDF from 'jspdf'; 
+  import html2canvas from'html2canvas';
 
-export default {
-  name: 'InputsPage',
-  components: {
-    mdbBtn,
-    mdbInput
-  },
-  methods: { 
-    download() {
-      var doc = new jsPDF
-      html2canvas(document.querySelector('#contract'),{
-        width: 10000,
-        height: 1000,
-
-      } 
-      ).then(canvas => {
-      document.body.appendChild(canvas)
+  export default {
+    name: 'InputsPage',
+    components: {
+      mdbBtn,
+      mdbInput
+    },
+    methods: { 
+      download() {
+        var doc = new jsPDF
+        html2canvas(document.querySelector('#contract'),{
+          width: 10000,
+          height: 1000
+        }
+        ).then(canvas => {
           var imgData1 = canvas.toDataURL('img/png');
           doc.addImage(imgData1, 'PNG', 0, 0);
           doc.save('sample.pdf');
-       });   
-    },
-    
-
-    undo() {
-      this.$refs.signaturePad.undoSignature();
-    },
-    save() {
-      const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
-      console.log(isEmpty);
-      console.log(data);
+        });   
+      },
+      undo() {
+        this.$refs.signaturePad.undoSignature();
+      },
+      save() {
+        const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
+        console.log(isEmpty);
+        console.log(data);
+      }
     }
   }
-}
 </script>
-
-  
-
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
   .form {
     /* The image used */
     background-color:#eadebd;
 
     /* Full height */
-    
     width:50%;
     margin:auto;
     margin-top: 20px;
     border: black;
     margin-bottom:100px;
-
-  
-    ;
 
     /* Center and scale the image nicely */
     background-position: center;
@@ -108,94 +94,85 @@ export default {
     background-size: cover;
   }
 
-button{
-  align-content: left;
-  
-}
+  button {
+    align-content: left;
+  }
 
-h3 {
-  font-weight: normal;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-p {
-  color:black;
-  font-size: 16px;
-  text-align: left;
-  margin-left: 10px;
-  margin-right:10px;
-  margin-top: 10px;
-  margin-bottom:10px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-}
+  h3 {
+    font-weight: normal;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 
-#disclaimer{
-  background-color:#eadebd;
-  margin-right:20px;
-  height:auto;
-  width:300px;
-  margin-left: 1250px;
-  border-radius:5px;
-  border: double 1px;
-  
-}
-  
-  
+  p {
+    color:black;
+    font-size: 16px;
+    text-align: left;
+    margin-left: 10px;
+    margin-right:10px;
+    margin-top: 10px;
+    margin-bottom:10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+  }
 
+  #disclaimer {
+    background-color:#eadebd;
+    margin-right:20px;
+    height:auto;
+    width:300px;
+    margin-left: 1250px;
+    border-radius:5px;
+    border: double 1px;
+  }
 
-#name1{
-  width: 130px;
-  display: inline-block;
-  height: 25px;
-  text-align:center;
+  #name1 {
+    width: 130px;
+    display: inline-block;
+    height: 25px;
+    text-align:center;
+  }
 
-}
+  #name2 {
+    width: 130px;
+    display: inline-block;
+    height: 25px;
+    text-align:center;
+  }
+  #text_groß {
+    height: 100px;
+    width:600px;
+    display: block;
+    margin: 0 auto;
+    text-align: start;
+  }
 
+  #Einsatz {
+    align-self: center;
+    margin: auto;
+  }
 
+  #signature {
+    align-self: center;
+    margin-left: 20px;
+  }
+  #pad {
+    border-bottom: 2px solid;
+    width:90px;
+    margin-bottom:5px;
+    
+  }
 
-#name2{
-  width: 130px;
-  display: inline-block;
-  height: 25px;
-  text-align:center;
-}
-#text_groß{
-  height: 100px;
-  width:600px;
-  display: block;
-  margin: 0 auto;
-  text-align: start;
-}
+  #contract {
+    height:800px;
+    width:650px;
+    border-radius: 5px;
+    border: double 7px;
+    margin-top:5px;
+    margin-bottom:10px;
+  }
 
-#Einsatz{
-  align-self: center;
-  margin: auto;
-}
-
-#signature{
-  align-self: center;
-  margin-left: 20px;
-}
-#pad{
-  border-bottom: 2px solid;
-  width:90px;
-  margin-bottom:5px;
-  
-}
-
-#contract{
-  height:800px;
-  width:650px;
-  border-radius: 5px;
-  border: double 7px;
-  margin-top:5px;
-  margin-bottom:10px;
-}
-
-#mail{
-  margin-top:1px;
-}
-  
-
+  #mail {
+    margin-top:1px;
+  } 
 </style>

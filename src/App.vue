@@ -15,21 +15,18 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300");
 
-#app {
-  text-align: center;
-  margin-top: 0px;
-  
-}
-img{
-  height: 50px;
-  opacity: 0.2;
-  border-radius:50%;
-  
-  
+  #app {
+    text-align: center;
+    margin-top: 0px;
+    
+  }
+  #img {
+    height: 50px;
+    opacity: 0.2;
+    border-radius:50%;
+  }
 
-}
-
-  body, html {
+    body, html {
     height: auto;
   }
   .bg {
