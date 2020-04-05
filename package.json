@@ -12,6 +12,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.0.0",
     "core-js": "^3.6.4",
+    "firebase": "^7.13.2",
     "html2canvas": "^1.0.0-rc.5",
     "jspdf": "^1.5.3",
     "mdbvue": "6.5.1",

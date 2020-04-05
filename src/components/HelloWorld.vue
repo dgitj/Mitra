@@ -40,6 +40,7 @@
         <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" outline/>
       </p>
       <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveToFirebase(mail1)" data-html2canvas-ignore>save</mdb-btn>
     </div>
 
     <div id="disclaimer">
@@ -55,6 +56,7 @@
   import { mdbInput } from "mdbvue";
   import jsPDF from 'jspdf';
   import html2canvas from'html2canvas';
+  import firebase from 'firebase';
 
   export default {
     name: 'InputsPage',
@@ -93,7 +95,23 @@
         console.log(data1);
         console.log(isEmpty2);
         console.log(data2);
+      },
+
+      saveToFirebase(email){
+        var emailObject = {
+        email: email
+    };
+
+        firebase.database().ref('users').push().set(emailObject)
+            /*.then(function(snapshot) {
+                //success(); // some success method
+            }, function(error) {
+                console.log('error' + error);
+                //error(); // some error method
+            });*/
+
       }
+
     }
   }
 </script>
