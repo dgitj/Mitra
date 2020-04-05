@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div ref="content" class="form" id="contract">
+    <div ref="content" class="form" id="contract" @submit.prevent="saveUser">
       <div id="head">
         <h3>Wettvertrag</h3>
         <p class="mb-2">
           Hiermit wette ich
-          <input type="text" id="name" class="form-control" placeholder="Dein Name"/>
+          <input v-model="name1" type="text"  class="form-control" placeholder="Dein Name" required/>
           mit
-          <input type="text" id="name" class="form-control" placeholder ="Wettpartner">.
+          <input v-model="name2" type="text" id="name" class="form-control" placeholder ="Wettpartner">.
         </p> 
       </div>
 
@@ -36,17 +36,28 @@
         Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen verschickt.
       </p>
       <p class= "mb-2" data-html2canvas-ignore>
-        <mdb-input type="email" placeholder="E-mail Wettpartner 1" size="sm" id="mail1" outline />
-        <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" outline/>
+        <mdb-input type="email" v-model="mail1" placeholder="E-mail Wettpartner 1" size="sm" id="mail1"  outline />
+        <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" v-model="mail2" outline/>
       </p>
       <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
-      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveToFirebase(mail1)" data-html2canvas-ignore>save</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveUser1" data-html2canvas-ignore>save</mdb-btn>
+    
+    <div id="user">
+      <ul class="collection with-header">
+        <li class="collection-header"><h4>User</h4></li>
+        <li v-for="user in users" v-bind:key="user.id" class="collection-item">
+          <div class="chip">{{user.name}}</div>
+          {{user.email}}
+          
+        </li>
+      </ul>
     </div>
-
     <div id="disclaimer">
       <h2>Disclaimer</h2>
       <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
     </div>
+  </div>
+  
 
   </div>   
 </template>
@@ -56,13 +67,21 @@
   import { mdbInput } from "mdbvue";
   import jsPDF from 'jspdf';
   import html2canvas from'html2canvas';
-  import firebase from 'firebase';
+  import db from './firebaseInit'
 
   export default {
     name: 'InputsPage',
     components: {
       mdbBtn,
       mdbInput
+    },
+    data() {
+      return{
+        users: [],
+        loading: true,
+        name:null,
+        email: null
+      }
     },
     methods: { 
       async download() {
@@ -97,23 +116,43 @@
         console.log(data2);
       },
 
-      saveToFirebase(email){
-        var emailObject = {
-        email: email
-    };
-
-        firebase.database().ref('users').push().set(emailObject)
-            /*.then(function(snapshot) {
-                //success(); // some success method
-            }, function(error) {
-                console.log('error' + error);
-                //error(); // some error method
-            });*/
+      saveUser1 () {
+          db.collection('users').add({
+            name: this.name1,
+            email: this.email1,
+            
+          })
+          .then(docRef => {
+            console.log('Client added: ', docRef.id)
+            this.$router.push('/')
+          })
+          .catch(error => {
+            console.error('Error adding employee: ', error)
+          })
+        },
+      
+      created() {
+        db
+          .collection('users')
+          .get()
+          .then(querySnapshot => {
+            this.loading = false;
+            querySnapshot.forEach(doc => {
+              const data = {
+            
+            
+                name: doc.data().name,
+                email: doc.data().email,
+                
+              };
+              this.users.push(data);
+            });
+          });
 
       }
-
     }
   }
+  
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -166,6 +205,18 @@
     bottom: 50px;
     right: 50px;
     width: 300px;
+    border-radius:5px;
+    border: double 1px;
+  }
+
+  #user
+  {
+    background-color:#eadebd;
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    width: 100px;
+    height: 300px;
     border-radius:5px;
     border: double 1px;
   }
