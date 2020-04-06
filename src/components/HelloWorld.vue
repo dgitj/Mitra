@@ -44,10 +44,9 @@
     
     <div id="user">
       <ul class="collection with-header">
-        <li class="collection-header"><h4>User</h4></li>
+        <h4>Community</h4>
         <li v-for="user in users" v-bind:key="user.id" class="collection-item">
           <div class="chip">{{user.name}}</div>
-          {{user.email}}
         </li>
       </ul>
     </div>
@@ -78,8 +77,11 @@
       return{
         users: [],
         loading: true,
-        name:null,
-        email: null
+        name1:null,
+        name2:null,
+        mail1:null,
+        mail2:null
+        
       }
     },
     methods: { 
@@ -118,7 +120,7 @@
       saveUser1 () {
           db.collection('users').add({
             name: this.name1,
-            email: this.email1,
+            email: this.mail1,
             
           })
           .then(docRef => {
@@ -178,6 +180,8 @@
     width: 750px;
   }
 
+  
+
   h3 {
     font-weight: normal;
     padding-top: 20px;
@@ -212,7 +216,7 @@
     position: fixed;
     top: 50px;
     left: 50px;
-    width: 100px;
+    width: 200px;
     height: 300px;
     border-radius:5px;
     border: double 1px;
