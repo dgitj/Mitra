@@ -39,8 +39,8 @@
         <mdb-input type="email" v-model="mail1" placeholder="E-mail Wettpartner 1" size="sm" id="mail1"  outline />
         <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" v-model="mail2" outline/>
       </p>
-      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
-      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveUser1" data-html2canvas-ignore>save</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveBothUsers" data-html2canvas-ignore>Save</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Mail</mdb-btn>
     
     <div id="user" data-html2canvas-ignore>
       <ul class="collection with-header">
@@ -134,7 +134,27 @@
           .catch(error => {
             console.error('Error adding employee: ', error)
           })
-        },
+      },
+
+       saveUser2 () {
+          db.collection('users').add({
+            name: this.name2,
+            email: this.mail2,
+            
+          })
+          .then(docRef => {
+            console.log('Client added: ', docRef.id)
+            this.$router.push('/')
+          })
+          .catch(error => {
+            console.error('Error adding employee: ', error)
+          })
+        }, 
+      
+      saveBothUsers(){
+        this.saveUser2()
+        this.saveUser1()
+      },
       
       created() {
         db
