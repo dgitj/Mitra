@@ -42,13 +42,13 @@
       <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
       <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveUser1" data-html2canvas-ignore>save</mdb-btn>
     
-    <div id="user">
+    <div id="user" data-html2canvas-ignore>
       <ul class="collection with-header">
         <h4>Community</h4>
         <li v-for="user in users" v-bind:key="user.id" class="collection-item">
           <div class="chip">{{user.name}}</div>
         </li>
-      </ul>
+        </ul>
     </div>
     <div id="disclaimer">
       <h2>Disclaimer</h2>
@@ -84,6 +84,10 @@
         
       }
     },
+    beforeMount(){
+      this.created()
+    },
+
     methods: { 
       async download() {
         var doc = new jsPDF("landscape")
@@ -217,9 +221,10 @@
     top: 50px;
     left: 50px;
     width: 200px;
-    height: 300px;
+    height: auto;
     border-radius:5px;
     border: double 1px;
+    align-content:left;
   }
 
   #name {
