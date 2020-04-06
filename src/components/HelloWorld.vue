@@ -5,7 +5,7 @@
         <h3>Wettvertrag</h3>
         <p class="mb-2">
           Hiermit wette ich
-          <input v-model="name1" type="text"  class="form-control" placeholder="Dein Name" required/>
+          <input v-model="name1" type="text"  class="form-control" id ="name" placeholder="Dein Name" required />
           mit
           <input v-model="name2" type="text" id="name" class="form-control" placeholder ="Wettpartner">.
         </p> 
@@ -48,7 +48,6 @@
         <li v-for="user in users" v-bind:key="user.id" class="collection-item">
           <div class="chip">{{user.name}}</div>
           {{user.email}}
-          
         </li>
       </ul>
     </div>
@@ -139,8 +138,6 @@
             this.loading = false;
             querySnapshot.forEach(doc => {
               const data = {
-            
-            
                 name: doc.data().name,
                 email: doc.data().email,
                 
