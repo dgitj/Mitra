@@ -39,10 +39,10 @@
         <mdb-input type="email" v-model="mail1" placeholder="E-mail Wettpartner 1" size="sm" id="mail1"  outline />
         <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" v-model="mail2" outline/>
       </p>
-      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Bestätigen</mdb-btn>
-      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveUser1" data-html2canvas-ignore>save</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Send Mail</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveUser1" data-html2canvas-ignore>Save User</mdb-btn>
     
-    <div id="user">
+    <div id="user" data-html2canvas-ignore>
       <ul class="collection with-header">
         <h4>Community</h4>
         <li v-for="user in users" v-bind:key="user.id" class="collection-item">
@@ -50,7 +50,7 @@
         </li>
       </ul>
     </div>
-    <div id="disclaimer">
+    <div id="disclaimer" data-html2canvas-ignore>
       <h2>Disclaimer</h2>
       <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
     </div>
@@ -66,6 +66,7 @@
   import jsPDF from 'jspdf';
   import html2canvas from'html2canvas';
   import db from './firebaseInit'
+  import firebase from "firebase"
 
   export default {
     name: 'InputsPage',
@@ -80,13 +81,15 @@
         name1:null,
         name2:null,
         mail1:null,
-        mail2:null
+        mail2:null,
+        
+        
         
       }
     },
     methods: { 
       async download() {
-        var doc = new jsPDF("landscape")
+        let doc = new jsPDF("landscape")
         await html2canvas(document.querySelector(".form"), {
           x: 0,
           y: 0,
@@ -97,11 +100,14 @@
           windowWidth: 0,
           windowHeight: 1000
         }).then(canvas => {
-          var imgData1 = canvas.toDataURL("img/png");
+          let imgData1 = canvas.toDataURL("img/png");
           doc.addImage(imgData1, 'PNG', 50, 10);
           doc.save('sample.pdf');
-        });
+        })
       },
+      
+
+    
       undo1() {
         this.$refs.signaturePad1.undoSignature();
       },
@@ -118,19 +124,38 @@
       },
 
       saveUser1 () {
-          db.collection('users').add({
-            name: this.name1,
-            email: this.mail1,
-            
-          })
-          .then(docRef => {
-            console.log('Client added: ', docRef.id)
-            this.$router.push('/')
-          })
-          .catch(error => {
-            console.error('Error adding employee: ', error)
-          })
-        },
+        let storageRef = firebase.storage().ref();
+        let contractsRef = storageRef.child('contracts/contract.png')
+        html2canvas(document.querySelector(".form"), {
+          x: 0,
+          y: 0,
+          width: 1000,
+          height: 1000,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: 0,
+          windowHeight: 1000
+        }).then(canvas => {
+          //create blob
+            canvas.toBlob(blob => {
+              contractsRef.put(blob).then(snapshot => {
+                snapshot.ref.getDownloadURL().then(downloadURL => {
+                  db.collection('users').add({
+                    name: this.name1,
+                    mail: this.mail1,
+                    downloadURL: downloadURL
+                  })
+                  .then(docRef => {
+                    console.log('Contract added: ', docRef.id)
+                  })
+                  .catch(error => {
+                    console.error('Error adding contract: ', error)
+                  })
+                })
+              })
+            },"img/png");
+        })
+      },
       
       created() {
         db
