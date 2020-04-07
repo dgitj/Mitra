@@ -33,7 +33,7 @@
         </div>
       </div> 
       <p data-html2canvas-ignore> 
-        Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden PDF Versionen des unterschriebenen Vertrages an eure Mail Adressen verschickt.
+        Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden Kopien des unterschriebenen Vertrages an eure Mail Adressen verschickt.
       </p>
       <p class= "mb-2" data-html2canvas-ignore>
         <mdb-input type="email" v-model="mail1" placeholder="E-mail Wettpartner 1" size="sm" id="mail1"  outline />
@@ -52,7 +52,7 @@
     </div>
     <div id="disclaimer" data-html2canvas-ignore>
       <h2>Disclaimer</h2>
-      <p>Wettschulden sind Ehrschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
+      <p>Wettschulden sind Ehrenschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
     </div>
   </div>
   
@@ -149,6 +149,11 @@
                     mail: this.mail1,
                     downloadURL: downloadURL
                   })
+                  db.collection("users").add({
+                    name: this.name2,
+                    mail: this.mail2,
+                    downloadURL
+                  })
                   .then(docRef => {
                     console.log('Contract added: ', docRef.id)
                   })
@@ -207,6 +212,7 @@
     border: double 7px;
     align-content: center;
     width: 750px;
+    
   }
 
   

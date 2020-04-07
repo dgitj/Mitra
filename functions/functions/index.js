@@ -23,7 +23,7 @@ exports.sendEmail = functions
             html: `
               <h1>Bet Confirmation</h1>
               <p>
-                  <img src="${snap.data().downloadURL}" alt="Contract image">
+                  <img src="${snap.data().downloadURL}" alt="Contract image" height = "600" width="600">
               </p>
             `
         };
