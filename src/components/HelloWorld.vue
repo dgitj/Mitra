@@ -39,8 +39,8 @@
         <mdb-input type="email" v-model="mail1" placeholder="E-mail Wettpartner 1" size="sm" id="mail1"  outline />
         <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" v-model="mail2" outline/>
       </p>
-      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Send Mail</mdb-btn>
-      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveUser1" data-html2canvas-ignore>Save User</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Download PDF</mdb-btn>
+      <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveAndSend" data-html2canvas-ignore>Send Mail</mdb-btn>
     
     <div id="user" data-html2canvas-ignore>
       <ul class="collection with-header">
@@ -127,7 +127,7 @@
         console.log(data2);
       },
 
-      saveUser1 () {
+      saveAndSend () {
         let storageRef = firebase.storage().ref();
         let contractsRef = storageRef.child('contracts/contract.png')
         html2canvas(document.querySelector(".form"), {
