@@ -10,7 +10,6 @@
           <input v-model="name2" type="text" id="name" class="form-control" placeholder ="Wettpartner">.
         </p> 
       </div>
-
       <div  id="bet">
         <mdb-input type="textarea" label="Wir wetten, dass..." :rows="3" class="text-box" />
         <mdb-input  type="textarea" label="Der Verlierer der Wette muss..." :rows="3" id="stake" class="text-box" />
@@ -49,14 +48,13 @@
           <div class="chip">{{user.name}}</div>
         </li>
         </ul>
+      
     </div>
     <div id="disclaimer" data-html2canvas-ignore>
       <h2>Disclaimer</h2>
       <p>Wettschulden sind Ehrenschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</p>
     </div>
   </div>
-  
-
   </div>   
 </template>
 
