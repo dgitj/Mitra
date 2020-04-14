@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class ="bg">
-    <img id="handshake-img" src="./assets/handshake-transparent.png" data-html2canvas-ignore>
+  <div id="app">
+    <!--img id="handshake-img" src="./assets/handshake-transparent.png" data-html2canvas-ignore-->
     <router-view/>
   </div>
 </template>
@@ -17,20 +17,22 @@ export default {
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
   @import url("https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300");
 
-  html, body {
+  /*html, body {
     height: 100%;
   }
+  */
   
   #app {
     text-align: center;
-    margin-top: 0px;
+    /*margin-top: 0px;*/
     height: auto;
     width: auto;
-    min-height: 900px;
-    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+    /*min-height: 900px;*/
+  /*  background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background: auto;
   }
 
   #handshake-img {

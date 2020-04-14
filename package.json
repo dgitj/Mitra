@@ -16,6 +16,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "jspdf": "^1.5.3",
     "mdbvue": "6.5.1",
+    "v-image": "^2.0.1",
     "vue": "^2.6.11",
     "vue-signature-pad": "^2.0.0"
   },
