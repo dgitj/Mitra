@@ -11,8 +11,8 @@
         </p> 
       </div>
       <div  id="bet">
-        <mdb-input type="textarea" label="Wir wetten, dass..." :rows="3" class="text-box" />
-        <mdb-input  type="textarea" label="Der Verlierer der Wette muss..." :rows="3" id="stake" class="text-box" />
+        <mdb-input type="textarea" size = "lg" label="Wir wetten, dass..." :rows="3" class="text-box" />
+        <mdb-input  type="textarea" size = "lg" label="Der Verlierer der Wette muss..." :rows="3" id="stake" class="text-box" />
       </div>
       <p id>Bitte unterschreibt hier: </p>
       <div class="container" id="signature">
@@ -35,8 +35,8 @@
         Gebt hier eure E-Mail Adressen an. Mit dem Drücken auf Bestätigen werden Kopien des unterschriebenen Vertrages an eure Mail Adressen verschickt.
       </p>
       <p class= "mb-2" data-html2canvas-ignore>
-        <mdb-input type="email" v-model="mail1" placeholder="E-mail Wettpartner 1" size="sm" id="mail1"  outline />
-        <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="sm" id="mail2" v-model="mail2" outline/>
+        <mdb-input type="email" v-model="mail1" placeholder="E-mail Wettpartner 1" size="lg" id="mail1"  outline />
+        <mdb-input type="email" placeholder="E-mail Wettpartner 2" size="lg" id="mail2" v-model="mail2" outline/>
       </p>
       <mdb-btn id="submit-button" class="btn btn-elegant" @click="download" data-html2canvas-ignore>Download PDF</mdb-btn>
       <mdb-btn id="submit-button" class="btn btn-elegant" @click="saveAndSend" data-html2canvas-ignore>Send Mail</mdb-btn>
@@ -228,7 +228,7 @@
 
   p {
     color:black;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font: outline;
     text-align: left;
     margin-left: 10px;
@@ -298,5 +298,10 @@
     margin-bottom: 50px;
     border-top: 2px solid;
     margin-top:5px;
+  }
+
+  .text-box{
+    font-size:2rem;
+
   }
 </style>
