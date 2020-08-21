@@ -4,7 +4,7 @@
       <div id="head">
         <h3>Wettvertrag</h3>
         <p class="mb-2">
-          Hiermit wette ich
+          Hiermit wette ich..
           <input v-model="name1" type="text"  class="form-control" id ="name" placeholder="Dein Name" required />
           mit
           <input v-model="name2" type="text" id="name" class="form-control" placeholder ="Wettpartner">.
