@@ -89,6 +89,7 @@
   import html2canvas from'html2canvas';
   import db from './firebaseInit'
   import firebase from "firebase"
+  import SidebarLink from "./SidebarLink";
 
   export default {
     name: 'InputsPage',
