@@ -22,19 +22,21 @@ export default {
   }
   */
   
+  /*
   #app {
     text-align: center;
-    /*margin-top: 0px;*/
+    margin-top: 0px;
     height: auto;
     width: auto;
-    /*min-height: 900px;*/
-  /*  background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");*/
+    min-height: 900px;
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background: auto;
   }
 
+*/
   #handshake-img {
     height: 100px;
     opacity: 0.5;

@@ -8,6 +8,7 @@ import store from './store'
 
 
 import VueSignaturePad from 'vue-signature-pad';
+import "@/assets/css/main.css"
  
 Vue.use(VueSignaturePad);
 
