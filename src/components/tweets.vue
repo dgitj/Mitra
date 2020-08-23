@@ -44,7 +44,7 @@
 						</a>
 					</mdb-view>
 					<mdb-card-body class="text-center" cascade>
-						<mdb-card-title><strong>Billy Cullen</strong></mdb-card-title>
+						<mdb-card-title><strong>Billy len</strong></mdb-card-title>
 						<h5>Web developer</h5>
 						<mdb-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. mdbIconcere modi sunt, quod quibusdam.</mdb-card-text>
 						<mdb-btn tag="a" floating small class="btn-fb"><mdb-icon fab icon="facebook" /></mdb-btn>
