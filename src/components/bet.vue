@@ -1,6 +1,4 @@
 <template>
-  <mdb-container> <!-- Probleme mit div schließung -->
-  <mdb-col>
    <div class = "form">
     <form id="contract" @submit.prevent="saveUser">
       <div id="head">
@@ -36,7 +34,6 @@
         </div>
       </div> 
   </form >
-  </mdb-col>
   <div id = "email">
    <p data-html2canvas-ignore id = "emailDescription"> 
         Mails will be send your way
@@ -63,7 +60,6 @@
       <h6>Wettschulden sind Ehrenschulden, die  gem. § 762 BGB, rechtlich gesehen, nicht zu erfüllen sind.</h6>
     </div>
   </div>  
-  </mdb-container> 
 </template>
 
 <script>
