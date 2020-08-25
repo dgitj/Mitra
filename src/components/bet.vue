@@ -79,8 +79,6 @@
       mdbBtn,
       mdbInput,
       VueGoodshareTwitter,
-      mdbContainer,
-      mdbCol
     },
 
     data() {
