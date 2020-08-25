@@ -63,8 +63,6 @@
 </template>
 
 <script>
-  import { mdbCol } from 'mdbvue';
-  import { mdbContainer } from 'mdbvue';
   import { mdbBtn } from 'mdbvue';
   import { mdbInput } from "mdbvue";
   import jsPDF from 'jspdf';
