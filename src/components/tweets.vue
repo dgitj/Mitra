@@ -6,7 +6,7 @@
           <th>#</th>
           <th>Author</th>
           <th>Bet Partner</th>
-          <th>Bet</th>
+          <th>Bettttttttttttttttttttttttttttttttttttttttttttttt</th>
         </tr>
       </mdb-tbl-head>
       <mdb-tbl-body>

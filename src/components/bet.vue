@@ -209,7 +209,7 @@ html, body {
   #contract {
     background-color:#eadebd; 
     border: black;
-    border-radius: 10px;
+    border-radius: 11px;
     border: double 7px;
     align-content: center;
     width: 750px;
