@@ -15,7 +15,7 @@
     "firebase": "^7.13.2",
     "fontawesome": "^5.6.3",
     "html2canvas": "^1.0.0-rc.5",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.5.1",
     "mdbvue": "6.5.1",
     "v-image": "^2.0.1",
     "vue": "^2.6.11",
